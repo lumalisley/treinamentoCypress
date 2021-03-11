@@ -1,11 +1,10 @@
 import LoginElements from '../elements/LoginElements'
 const loginElements = new LoginElements
-const url = Cypress.config("baseUrl")
 
 class LoginPage {
 
     systemAccess() {
-        cy.visit(url)
+        cy.visit('/auth/login')
     }
     setUser(user) {
         cy.get(loginElements.userField())
@@ -18,6 +17,10 @@ class LoginPage {
     makeLogin() {
         cy.get(loginElements.submitBtn())
         .click()
+    }
+    accessOk(){
+        cy.url()
+        .should('be.equal',`${Cypress.config("baseUrl")}dashboard`)
     }
 }
 
